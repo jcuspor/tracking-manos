@@ -25,10 +25,13 @@ def draw_landmarks(img, detection_results):
         )
 
         index_tip = hand_landmarks[8].y
-        index_pip = hand_landmarks[6].y
+        middle_tip = hand_landmarks[12].y
+        thumb_tip = hand_landmarks[4].y
 
-        if index_tip > index_pip:
-            pyautogui.press("volumeup")
+        if index_tip > thumb_tip:
+            pyautogui.press("volumeup", 1, 0.2)
+        elif middle_tip > thumb_tip:
+            pyautogui.press("volumedown", 1, 0.2)
 
     return img_copy
 
