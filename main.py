@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 from mediapipe.tasks import python
 import numpy as np
+import pyautogui
 
 base_options = python.BaseOptions(model_asset_path='hand_landmarker.task')
 options = mp.tasks.vision.HandLandmarkerOptions(base_options=base_options, num_hands=2)
@@ -22,6 +23,12 @@ def draw_landmarks(img, detection_results):
             mp_drawing_styles.get_default_hand_landmarks_style(),
             mp_drawing_styles.get_default_hand_connections_style()
         )
+
+        index_tip = hand_landmarks[8].y
+        index_pip = hand_landmarks[6].y
+
+        if index_tip > index_pip:
+            pyautogui.press("volumeup")
 
     return img_copy
 
